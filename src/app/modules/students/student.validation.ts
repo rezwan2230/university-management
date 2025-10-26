@@ -42,27 +42,34 @@ const localGuardianValidationSchema = z.object({
     .nonempty({ message: 'Local guardian address is required' }),
 });
 
-export const studentValidationSchema = z.object({
-  id: z.string().nonempty({ message: 'Student ID is required' }),
-  name: userNameValidationSchema,
-  gender: z.enum(['male', 'female', 'other']),
-  dateOfBirth: z.string().optional(),
-  email: z.string().email({ message: 'Valid email is required' }),
-  contactNo: z.string().nonempty({ message: 'Contact number is required' }),
-  emergencyContactNo: z
-    .string()
-    .nonempty({ message: 'Emergency contact number is required' }),
-  bloogGroup: z
-    .enum(['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'])
-    .optional(),
-  presentAddress: z
-    .string()
-    .nonempty({ message: 'Present address is required' }),
-  permanentAddress: z
-    .string()
-    .nonempty({ message: 'Permanent address is required' }),
-  guardian: guardianValidationSchema,
-  localGuardian: localGuardianValidationSchema,
-  profileImg: z.string().optional(),
-  isDeleted: z.boolean().optional().default(false),
+const createStudentValidationSchema = z.object({
+  body: z.object({
+    password: z.string().max(20),
+    student: z.object({
+      name: userNameValidationSchema,
+      gender: z.enum(['male', 'female', 'other']),
+      dateOfBirth: z.date().optional(),
+      email: z.string().email({ message: 'Valid email is required' }),
+      contactNo: z.string().nonempty({ message: 'Contact number is required' }),
+      emergencyContactNo: z
+        .string()
+        .nonempty({ message: 'Emergency contact number is required' }),
+      bloogGroup: z
+        .enum(['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'])
+        .optional(),
+      presentAddress: z
+        .string()
+        .nonempty({ message: 'Present address is required' }),
+      permanentAddress: z
+        .string()
+        .nonempty({ message: 'Permanent address is required' }),
+      guardian: guardianValidationSchema,
+      localGuardian: localGuardianValidationSchema,
+      profileImg: z.string().optional(),
+    }),
+  }),
 });
+
+export const StudentValidations = {
+  createStudentValidationSchema,
+};
