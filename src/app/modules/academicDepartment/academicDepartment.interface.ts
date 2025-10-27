@@ -4,5 +4,3 @@ export type TAcademicDepartment = {
   name: string;
   academicFaculty: Types.ObjectId;
 };
-
-

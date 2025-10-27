@@ -19,8 +19,6 @@ export const createAcademicDepartmentSchema = new Schema<TAcademicDepartment>(
   },
 );
 
-
-
 export const AcademicDepartment = model<TAcademicDepartment>(
   'academicDepartment',
   createAcademicDepartmentSchema,

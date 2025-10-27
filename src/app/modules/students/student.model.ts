@@ -80,12 +80,12 @@ const studentSchema = new Schema<TStudent, StudentModel>(
       type: String,
       required: [true, 'ID is required'],
       unique: true,
-      ref: 'User',
     },
     user: {
       type: Schema.Types.ObjectId,
       required: [true, 'User ID is required'],
       unique: true,
+      ref: 'User',
     },
     name: {
       type: userNameSchema,
