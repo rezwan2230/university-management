@@ -7,7 +7,6 @@ import { User } from './user.model';
 import { generatedStudentId } from './user.utils';
 
 const createUserIntoDb = async (password: string, payload: TStudent) => {
-
   //For user
   const userData: Partial<TUser> = {};
   userData.password = password || (config.default_password as string);
