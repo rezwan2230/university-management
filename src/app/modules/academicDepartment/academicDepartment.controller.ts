@@ -34,7 +34,7 @@ const getSingleAcademicDepartment = catchAsync(async (req, res) => {
   sendResponse(res, {
     success: true,
     statusCode: status.OK,
-    message: 'Single Academic Faculty retirved successfully',
+    message: 'Single Academic Department retirved successfully',
     data: result,
   });
 });
@@ -49,12 +49,12 @@ const updateSingleAcademicDepartment = catchAsync(async (req, res) => {
   sendResponse(res, {
     success: true,
     statusCode: status.OK,
-    message: 'Academic Faculty updated successfully',
+    message: 'Academic Department updated successfully',
     data: result,
   });
 });
 
-export const AcademicFacultyControllers = {
+export const AcademicDepartmentControllers = {
   createAcademicDepartment,
   getAllAcademicDepartment,
   getSingleAcademicDepartment,
