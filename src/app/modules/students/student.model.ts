@@ -144,6 +144,10 @@ const studentSchema = new Schema<TStudent, StudentModel>(
       required: [true, 'Academic Department information is required'],
       ref: 'AcademicDepartment',
     },
+    isDeleted: {
+      type: Boolean,
+      default: false,
+    },
   },
   {
     toJSON: {
@@ -174,9 +178,9 @@ studentSchema.pre('aggregate', function (next) {
 });
 
 //creating a custom static method
-studentSchema.statics.isUserExists = async function (id: string) {
-  const existingUser = await Student.findOne({ id });
-  return existingUser;
+studentSchema.statics.isStudentExists = async function (id: string) {
+  const existingStudent = await Student.findOne({ id });
+  return existingStudent;
 };
 
 export const Student = model<TStudent, StudentModel>('Student', studentSchema);
