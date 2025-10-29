@@ -3,17 +3,12 @@ import { z } from 'zod';
 const createAcademicDepartmentValidationSchema = z.object({
   body: z.object({
     name: z
-      .string()
+      .string({ error: 'Department Name is required' })
       .trim()
-      .min(1, { message: 'Name is required' })
-      .refine((val) => typeof val === 'string', {
-        message: 'Name must be a string',
-      }),
-
+      .min(2, { error: 'Department Name must be at least 2 characters long' }),
     academicFaculty: z
-      .string()
+      .string({ error: 'Faculty is required' })
       .trim()
-      .min(1, { message: 'Faculty is required' })
       .regex(/^[0-9a-fA-F]{24}$/, { message: 'Invalid Faculty ID format' }),
   }),
 });
@@ -21,19 +16,15 @@ const createAcademicDepartmentValidationSchema = z.object({
 const updateAcademicDepartmentValidationSchema = z.object({
   body: z.object({
     name: z
-      .string()
+      .string({ error: 'Department Name is required' })
       .trim()
-      .min(1, { message: 'Name is required' })
-      .refine((val) => typeof val === 'string', {
-        message: 'Name must be a string',
-      })
+      .min(2, { error: 'Department Name must be at least 2 characters long' })
       .optional(),
 
     academicFaculty: z
       .string()
       .trim()
-      .min(1, { message: 'Faculty is required' })
-      .regex(/^[0-9a-fA-F]{24}$/, { message: 'Invalid Faculty ID format' })
+      .nonempty('Faculty is required')
       .optional(),
   }),
 });
