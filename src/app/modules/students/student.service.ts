@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import mongoose from 'mongoose';
+import mongoose, { Query } from 'mongoose';
 import { Student } from './student.model';
 import AppError from '../../errors/AppError';
 import status from 'http-status';
@@ -156,6 +156,48 @@ const deleteStudentFromDB = async (id: string) => {
     throw new AppError(status.BAD_REQUEST, 'Failed to delete Student');
   }
 };
+
+// const getAllStudentsFromDB = async (query: Record<string, unknown>) => {
+//   console.log('base query', query);
+
+//   const searchTerm = query?.searchTerm ? String(query.searchTerm) : '';
+
+//   const searchCondition =
+//     searchTerm.length > 0
+//       ? {
+//           $or: ['name.firstName', 'presentAddress'].map((field) => ({
+//             [field]: { $regex: searchTerm, $options: 'i' },
+//           })),
+//         }
+//       : {};
+
+//   const searchQuery = Student.find(searchCondition);
+
+//   const queryObj = { ...query };
+
+//   const excludeFields = ['searchTerm', 'sort', 'page', 'limit'];
+//   excludeFields.forEach((elm) => delete queryObj[elm]);
+
+//   const filterQuery = searchQuery
+//     .find(queryObj)
+//     .populate('admissionSemester')
+//     .populate({
+//       path: 'academicDepartment',
+//       populate: 'academicFaculty',
+//     });
+
+//   const sort = query?.sort ? String(query.sort) : '-createdAt';
+//   const sortQuery = filterQuery.sort(sort);
+
+//   const page = query?.page ? Number(query.page) : 1;
+//   const limit = query?.limit ? Number(query.limit) : 4;
+//   const skip = (page - 1) * limit;
+//   const paginateQuery = sortQuery.skip(skip);
+
+//   const limitQuery = await paginateQuery.limit(limit);
+
+//   return limitQuery;
+// };
 
 export const StudentServices = {
   getAllStudentsFromDB,
